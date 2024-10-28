@@ -1,6 +1,20 @@
 <?php
 
-// Digitar PHP (1º Aqui)
+// verifica se o formulario foi enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $senha = $_POST['senha'];
+
+    // verifica se a senha e igual a 12345
+    if ($senha == '12345') {
+        // redireciona para a pagina de boas vindas
+        header ("location: 4b_bem_vindo.php");
+        exit();
+    } else {
+        // exibe mensagem de erro
+        $erro = "senha incorreta. Tente novamente";
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +34,10 @@
     <?php
 
     // Digitar PHP (2º Aqui)
+    // EXIBE MENSAGEM DE ERRO SE ESXISTIR
+    if(isset($erro)) {
+        echo "<p> Style= 'color :red; '>$erro</p>";
+    }
 
     ?>
 </body>
