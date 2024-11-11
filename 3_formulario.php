@@ -22,7 +22,7 @@
 <?php
 // verifica se o formulario foi enviado
 
-if ($_SERVCER ['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
     // recebe valores enviados pelo formulario
     $nome = $_POST ['nome'];
     $Email = $_POST ['email'];

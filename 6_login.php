@@ -17,7 +17,40 @@
 
     <?php
 
-    // Digitar PHP (1º Aqui)
+    // verifica se o formulario foi enviado
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // RECEBE OS VALORES ENVIADOS PELO FORMULARIO
+        $nome = $_POST['nome'];
+        $senha = $_POST['senha'];
+
+        // abre o arquivo usuarios.txt para leitura
+        $arquivo = fopen('usuarios.txt', 'r');
+
+        // assumimos que o login e falso, assim nao damos o acesso direto
+        $login_sucesso = false;
+
+        // le cada linha do arquivo
+        while (($linha = fgets($arquivo)) !== false) {
+            // divide a linha pelo denominador ";"
+            list($usuario_arquivo, $senha_arquivo) = explode(';', trim($linha));
+
+            // verifica se o nome e a senha corespondem aos valores do arquivo
+            if ($nome == $usuario_arquivo && $senha == $senha_arquivo) {
+                $login_sucesso = true;
+                break;
+            }
+
+        }
+
+        // fecha o arquivo
+        fclose($arquivo);
+        // exibe a mensagem de sucesso ou erro
+        if ($login_sucesso) {
+            echo "<p>login realizado com sucesso, bem vindo $nome!</p>";;
+        } else {
+            echo "<p> style = 'color: red;'> usuario ou senha incorretos </p>";
+        }
+    }
     
     ?>
 </body>

@@ -1,10 +1,21 @@
 <?php
 // Página de login (15a_sistema.php)
+session_start();
 
+// verifica se o formulari foi enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $usuario = $_POST ['usuario'];
+    $senha = $_POST ['senha'];
 
-// Digitar PHP (1º Aqui)
-
-
+    // verifica se os dados vao ladidos (usuario: admin, senha: 123)
+    if ($usuario == 'admin' && $senha == 123) {
+        $_SESSION ['usuario'] = $usuario; //salva o nome do usuario na sessao
+        header("Location: 15b_restrita.php");
+        exit();
+    } else {
+        $erro = "usuario e senha incorretos";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +39,7 @@
     if (isset($erro)) {
         echo "<p style='color: red;'>$erro</p>";
     }
+    
     ?>
 </body>
 </html>
